@@ -117,12 +117,7 @@ deletes them from `require.cache` as well.
 Running with env vars `DEBUG=invalidate-module` will log the modules that are
 deleted from `require.cache`.
 
-## Further Reading
-- My [blog post][b] on this subject.
-- [node-hot-reloading-boilerplate][n]
 
-[b]: https://kentor.me/posts/node-js-hot-reloading-development/
 [c]: https://github.com/paulmillr/chokidar
-[n]: https://github.com/kentor/node-hot-reloading-boilerplate
 [p]: https://nodejs.org/api/path.html#path_path_resolve_paths
 [r]: https://nodejs.org/api/globals.html#globals_require_resolve
