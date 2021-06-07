@@ -1,4 +1,3 @@
-const debug = require('debug')('invalidate-module');
 const Module = require('module');
 const DepGraph = require('dependency-graph').DepGraph;
 
@@ -17,9 +16,17 @@ Module.prototype.require = function(path) {
 function invalidate(absPathToModule) {
   if (graph.hasNode(absPathToModule)) {
     graph.dependantsOf(absPathToModule).concat([absPathToModule]).forEach(m => {
+      const mod = require.cache[m];
+      if (mod) {
+        const siblings = mod.parent.children.indexOf(mod);
+        if (siblings >= 0) {
+          mod.parent.children.splice(siblings, 1);
+        }
+      }
+
       delete require.cache[m];
+
       graph.removeNode(m);
-      debug('deleted module from cache %s', m);
     });
   }
 }
